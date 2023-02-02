@@ -13,9 +13,6 @@
 namespace chess
 {
     enum pieceColor {white, black};
-    std::string colorToString(const pieceColor& color);
-    pieceColor stringToColor(const std::string& color);
-    pieceColor oppositeColor(const pieceColor& color);
 
     class chessPiece
     {
@@ -24,18 +21,18 @@ namespace chess
         int id;
         char symbol;
         bool hasMoved;
-        bool enPassantPossible;
+        bool enPassant;
 
     public:
-        chessPiece(pieceColor col, int pieceId, char pieceSymbol)
-        : chessPiece(col, pieceId, pieceSymbol, false, false) {}
+        chessPiece(pieceColor col, int pId, char pieceSymbol)
+        : chessPiece(col, pId, pieceSymbol, false, false) {}
 
-        chessPiece(pieceColor col, int pieceId, char pieceSymbol, bool moved)
-        : chessPiece(col, pieceId, pieceSymbol, moved, false) {}
+        chessPiece(pieceColor col, int pId, char piece, bool moved)
+        : chessPiece(col, pId, piece, moved, false) {}
         
-        chessPiece(pieceColor col, int pieceId, char pieceSymbol, bool moved, bool enPassant)
-        : color{col}, id{pieceId}, symbol{pieceSymbol},
-          hasMoved{moved}, enPassantPossible{enPassant} {}
+        chessPiece(pieceColor col, int pId, char piece, bool moved, bool enPass)
+        : color{col}, id{pId}, symbol{piece},
+          hasMoved{moved}, enPassant{enPass} {}
         
         virtual ~chessPiece() = default;
 
@@ -44,8 +41,8 @@ namespace chess
         char getSymbol() const { return symbol; }
         bool hasMoved() const { return hasMoved; }
         void hasBeenMoved() { hasMoved = true; }
-        bool isEnPassantPossible() const { return enPassantPossible; }
-        void setEnPassant(const bool& enPassant) { enPassantPossible = enPassant; }
+        bool isEnPassantPossible() const { return enPassant; }
+        void setEnPassant(const bool& enPass) { enPassant = enPass; }
         
         virtual std::unique_ptr<chessPiece> clone() const = 0;
         virtual std::vector<int> getValidMoves(
@@ -53,7 +50,9 @@ namespace chess
             const std::vector<std::unique_ptr<chessPiece>>& chessBoard
         ) = 0;
 
-        friend std::ostream& operator<<(std::ostream &output, const chessPiece& piece);
+        friend std::ostream& operator<<(
+            std::ostream &output, const chessPiece& piece
+        );
     };
 }
 
