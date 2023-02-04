@@ -6,25 +6,24 @@
 #include "Bishop.hpp"
 #include "chessPieceUtils.hpp"
 
-namespace chess
-{
-    std::unique_ptr<ChessPiece> Bishop::clone() const {
-        return std::move(
-            std::make_unique<Bishop>(
-                Bishop(this->color, this->id, this->hasMoved)
-            )
-        );
-    }
+using chess::ChessPiece, chess::Bishop;
 
-    std::vector<int> Bishop::getLegalMoves(
-        const int startPosition,
-        const std::vector<std::unique_ptr<ChessPiece>>& chessBoard
-    ) const {
-        std::vector<int> legalNewPositions;
-        findDiagMoves(
-            this->color, startPosition, chessBoard, legalNewPositions
-        );
+std::unique_ptr<ChessPiece> Bishop::clone() const {
+    return std::move(
+        std::make_unique<Bishop>(
+            Bishop(this->color, this->id, this->hasMoved)
+        )
+    );
+}
 
-        return legalNewPositions;
-    }
+std::vector<int> Bishop::getLegalMoves(
+    const int startPosition,
+    const std::vector<std::unique_ptr<ChessPiece>>& chessBoard
+) const {
+    std::vector<int> legalNewPositions;
+    findDiagMoves(
+        this->color, startPosition, chessBoard, legalNewPositions
+    );
+
+    return legalNewPositions;
 }
