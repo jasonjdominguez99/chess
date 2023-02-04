@@ -1,15 +1,15 @@
-// chessPiece
+// ChessPiece
 //
 // Author: Jason Dominguez
 // Date: 2023-02-02
 
 #include <iostream>
 #include <sstream>
-#include "chessPiece.hpp"
+#include "ChessPiece.hpp"
 
 namespace chess
 {
-    std::ostream& operator<<(std::ostream& output, const chessPiece& piece) {
+    std::ostream& operator<<(std::ostream& output, const ChessPiece& piece) {
         // Display chess piece symbol using ANSI to make
         // symbols bold and for black pieces gray
         std::stringstream ansiSymbol;

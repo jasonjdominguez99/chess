@@ -1,10 +1,10 @@
-// chessPieceUtils
+// ChessPieceUtils
 //
 // Author: Jason Dominguez
 // Date: 2023-02-02
 
 #include <algorithm>
-#include "chessPieceUtils.hpp"
+#include "ChessPieceUtils.hpp"
 
 namespace chess
 {
@@ -21,25 +21,25 @@ namespace chess
     }
 
     void copyBoard(
-        const std::vector<std::unique_ptr<chessPiece>>& board,
-        std::vector<std::unique_ptr<chessPiece>>& bCopy
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
+        std::vector<std::unique_ptr<ChessPiece>>& bCopy
     ) {
         // Create temp copy of board
-        std::vector<std::unique_ptr<chessPiece>> bCopy(board.size());
+        std::vector<std::unique_ptr<ChessPiece>> bCopy(board.size());
         for (int i = 0; i < bCopy.size(); i++) {
             if (board[i]) {
-                bCopy[i] = std::unique_ptr<chessPiece>(
+                bCopy[i] = std::unique_ptr<ChessPiece>(
                     board[i]->clone()
                 );
             } else {
-                bCopy[i] = std::unique_ptr<chessPiece>{nullptr};
+                bCopy[i] = std::unique_ptr<ChessPiece>{nullptr};
             }
         }
     }
 
     movesInfo getAllLegalMoves(
         pieceColor color,
-        const std::vector<std::unique_ptr<chessPiece>>& board
+        const std::vector<std::unique_ptr<ChessPiece>>& board
     ) {
         // Want to return possible positions of pieces to move,
         // possible moves for each of these pieces and all possible moves
@@ -52,7 +52,7 @@ namespace chess
             if (piece && piece->getColor() == color) {
                 std::vector<int> legalMoves;
 
-                // std::vector<std::unique_ptr<chessPiece>> bCopy;
+                // std::vector<std::unique_ptr<ChessPiece>> bCopy;
                 // copyBoard(board, bCopy);
                 // legalMoves = piece->getValidMoves(
                 //     pos, std::move(bCopy)
@@ -81,7 +81,7 @@ namespace chess
     bool addMoveIfValid(
         int position,
         pieceColor color,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions
     ) {
         bool blocked = false;
@@ -102,7 +102,7 @@ namespace chess
     void findHorizAndVertMoves(
         pieceColor color,
         int startCol, int startRow,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
         int maxHorizDist = numFiles, int maxVertDist = numRanks
     ) {
@@ -141,7 +141,7 @@ namespace chess
     void findDiagMoves(
         pieceColor color,
         int startCol, int startRow,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
         int maxHorizDist = numFiles, int maxVertDist = numRanks
     ) {

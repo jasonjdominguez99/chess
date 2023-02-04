@@ -1,12 +1,12 @@
-// chessPieceUtils
+// ChessPieceUtils
 //
 // Author: Jason Dominguez
 // Date: 2023-02-02
 
-#include "chessPiece.hpp"
+#include "ChessPiece.hpp"
 
-#ifndef chessPieceUtils_H
-#define chessPieceUtils_H
+#ifndef ChessPieceUtils_H
+#define ChessPieceUtils_H
 
 namespace chess
 {
@@ -17,8 +17,8 @@ namespace chess
     pieceColor oppositeColor(pieceColor color);
 
     void copyBoard(
-        const std::vector<std::unique_ptr<chessPiece>>& board,
-        std::vector<std::unique_ptr<chessPiece>>& bCopy
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
+        std::vector<std::unique_ptr<ChessPiece>>& bCopy
     );
 
     struct movesInfo {
@@ -29,20 +29,20 @@ namespace chess
 
     movesInfo getAllLegalMoves(
         pieceColor color,
-        const std::vector<std::unique_ptr<chessPiece>>& board
+        const std::vector<std::unique_ptr<ChessPiece>>& board
     );
 
     bool addMoveIfValid(
         int position,
         pieceColor color,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions
     );
 
     void findHorizAndVertMoves(
         pieceColor color,
         int startCol, int startRow,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
         int maxHorizDist = numFiles, int maxVertDist = numRanks
     );
@@ -50,7 +50,7 @@ namespace chess
     void findDiagMoves(
         pieceColor color,
         int startCol, int startRow,
-        const std::vector<std::unique_ptr<chessPiece>>& board,
+        const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
         int maxHorizDist = numFiles, int maxVertDist = numRanks
     );

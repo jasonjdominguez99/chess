@@ -1,4 +1,4 @@
-// chessPiece
+// ChessPiece
 //
 // Author: Jason Dominguez
 // Date: 2023-02-02
@@ -7,14 +7,14 @@
 #include <vector>
 #include <memory>
 
-#ifndef chessPiece_H
-#define chessPiece_H
+#ifndef ChessPiece_H
+#define ChessPiece_H
 
 namespace chess
 {
     enum pieceColor {white, black};
 
-    class chessPiece
+    class ChessPiece
     {
     protected:
         pieceColor color;
@@ -24,17 +24,17 @@ namespace chess
         bool enPassant;
 
     public:
-        chessPiece(pieceColor col, int pId, char pieceSymbol)
-        : chessPiece(col, pId, pieceSymbol, false, false) {}
+        ChessPiece(pieceColor col, int pId, char pieceSymbol)
+        : ChessPiece(col, pId, pieceSymbol, false, false) {}
 
-        chessPiece(pieceColor col, int pId, char piece, bool moved)
-        : chessPiece(col, pId, piece, moved, false) {}
+        ChessPiece(pieceColor col, int pId, char piece, bool moved)
+        : ChessPiece(col, pId, piece, moved, false) {}
         
-        chessPiece(pieceColor col, int pId, char piece, bool moved, bool enPass)
+        ChessPiece(pieceColor col, int pId, char piece, bool moved, bool enPass)
         : color{col}, id{pId}, symbol{piece},
           hasMoved{moved}, enPassant{enPass} {}
         
-        virtual ~chessPiece() = default;
+        virtual ~ChessPiece() = default;
 
         pieceColor getColor() const { return color; }
         int getId() const { return id; }
@@ -44,14 +44,14 @@ namespace chess
         bool isEnPassantPossible() const { return enPassant; }
         void setEnPassant(const bool& enPass) { enPassant = enPass; }
         
-        virtual std::unique_ptr<chessPiece> clone() const = 0;
+        virtual std::unique_ptr<ChessPiece> clone() const = 0;
         virtual std::vector<int> getValidMoves(
             const int& startPosition, 
-            const std::vector<std::unique_ptr<chessPiece>>& chessBoard
+            const std::vector<std::unique_ptr<ChessPiece>>& chessBoard
         ) = 0;
 
         friend std::ostream& operator<<(
-            std::ostream &output, const chessPiece& piece
+            std::ostream &output, const ChessPiece& piece
         );
     };
 }
