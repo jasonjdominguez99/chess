@@ -40,19 +40,21 @@ namespace chess
     );
 
     void findHorizAndVertMoves(
-        pieceColor color,
-        int startCol, int startRow,
+        const pieceColor color,
+        const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        int maxHorizDist = numFiles, int maxVertDist = numRanks
+        const int maxHorizDist = numFiles,
+        const int maxVertDist = numRanks
     );
 
     void findDiagMoves(
-        pieceColor color,
-        int startCol, int startRow,
+        const pieceColor color,
+        const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        int maxHorizDist = numFiles, int maxVertDist = numRanks
+        const int maxHorizDist = numFiles,
+        const int maxVertDist = numRanks
     );
 }
 

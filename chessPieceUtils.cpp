@@ -8,7 +8,7 @@
 
 namespace chess
 {
-    std::string colorToString(pieceColor color) {
+    std::string colorToString(const pieceColor color) {
         return color == white ? "white" : "black";
     }
 
@@ -16,7 +16,7 @@ namespace chess
         return color == "white" || color == "White" ? white : black;
     }
 
-    pieceColor oppositeColor(pieceColor color) {
+    pieceColor oppositeColor(const pieceColor color) {
         return color == white ? black : white;
     }
 
@@ -38,7 +38,7 @@ namespace chess
     }
 
     movesInfo getAllLegalMoves(
-        pieceColor color,
+        const pieceColor color,
         const std::vector<std::unique_ptr<ChessPiece>>& board
     ) {
         // Want to return possible positions of pieces to move,
@@ -79,8 +79,8 @@ namespace chess
     }
 
     bool addMoveIfValid(
-        int position,
-        pieceColor color,
+        const int position,
+        const pieceColor color,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions
     ) {
@@ -100,12 +100,15 @@ namespace chess
     }
 
     void findHorizAndVertMoves(
-        pieceColor color,
-        int startCol, int startRow,
+        const pieceColor color,
+        const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        int maxHorizDist = numFiles, int maxVertDist = numRanks
+        const int maxHorizDist = numFiles,
+        const int maxVertDist = numRanks
     ) {
+        int startCol = startPos%8, startRow = startPos/8;
+        
         // Find valid moves to the right
         for (int i = startCol + 1; i < maxHorizDist; i++) {
             bool blocked = addMoveIfValid(
@@ -139,12 +142,15 @@ namespace chess
     }
 
     void findDiagMoves(
-        pieceColor color,
-        int startCol, int startRow,
+        const pieceColor color,
+        const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        int maxHorizDist = numFiles, int maxVertDist = numRanks
+        const int maxHorizDist = numFiles,
+        const int maxVertDist = numRanks
     ) {
+        int startCol = startPos%8, startRow = startPos/8;
+
         // Find valid move along forward right diagonal
         int numAlongForwardRightDiag = std::min(
             std::min((numRanks - 1) - startRow, (numFiles - 1) - startCol),
