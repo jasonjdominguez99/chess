@@ -107,10 +107,11 @@ namespace chess
         const int maxHorizDist = numFiles,
         const int maxVertDist = numRanks
     ) {
-        int startCol = startPos%8, startRow = startPos/8;
+        int startCol = startPos%numFiles, startRow = startPos/numFiles;
         
         // Find valid moves to the right
-        for (int i = startCol + 1; i < maxHorizDist; i++) {
+        int rightLimit = std::min(numFiles, (startCol + 1) + maxHorizDist);
+        for (int i = startCol + 1; i < rightLimit; i++) {
             bool blocked = addMoveIfValid(
                 numFiles*startRow + i, color, board, outValidNewPositions
             );
@@ -125,6 +126,7 @@ namespace chess
             if (blocked) break;
         }
         // Find valid forward moves
+        int forwardLimit = std::min(numRanks, (startRow + 1) + maxVertDist);
         for (int i = startRow + 1; i < maxVertDist; i++) {
             bool blocked = addMoveIfValid(
                 numFiles*i + startCol, color, board, outValidNewPositions
@@ -149,7 +151,7 @@ namespace chess
         const int maxHorizDist = numFiles,
         const int maxVertDist = numRanks
     ) {
-        int startCol = startPos%8, startRow = startPos/8;
+        int startCol = startPos%numFiles, startRow = startPos/numFiles;
 
         // Find valid move along forward right diagonal
         int numAlongForwardRightDiag = std::min(
