@@ -57,5 +57,6 @@ std::vector<int> King::getLegalMoves(
             }
         }
     }
+    
     return legalNewPositions;
 }
