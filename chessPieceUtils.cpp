@@ -8,6 +8,10 @@
 
 namespace chess
 {
+    position positionToColAndRow(const int position) {
+        return { position%numFiles, position/numFiles };
+    }
+
     std::string colorToString(const pieceColor color) {
         return color == white ? "white" : "black";
     }
@@ -107,7 +111,7 @@ namespace chess
         const int maxHorizDist = numFiles,
         const int maxVertDist = numRanks
     ) {
-        int startCol = startPos%numFiles, startRow = startPos/numFiles;
+        const auto [startCol, startRow] = positionToColAndRow(startPos);
         
         // Find valid moves to the right
         int rightLimit = std::min(numFiles, (startCol + 1) + maxHorizDist);
@@ -151,7 +155,7 @@ namespace chess
         const int maxHorizDist = numFiles,
         const int maxVertDist = numRanks
     ) {
-        int startCol = startPos%numFiles, startRow = startPos/numFiles;
+        const auto [startCol, startRow] = positionToColAndRow(startPos);
 
         // Find valid move along forward right diagonal
         int numAlongForwardRightDiag = std::min(

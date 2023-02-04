@@ -12,6 +12,13 @@ namespace chess
 {
     static inline const int numRanks = 8, numFiles = 8;
 
+    struct position {
+        int col,
+        int row
+    };
+
+    position positionToColAndRow(const int position);
+
     std::string colorToString(pieceColor color);
     pieceColor stringToColor(const std::string& color);
     pieceColor oppositeColor(pieceColor color);
