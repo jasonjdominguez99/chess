@@ -4,7 +4,7 @@
 // Date: 2023-02-04
 
 #include "Knight.hpp"
-#include "chessPieceUtils.hpp"
+#include "ChessPieceUtils.hpp"
 
 using chess::ChessPiece, chess::Knight;
 

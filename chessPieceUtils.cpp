@@ -29,7 +29,6 @@ namespace chess
         std::vector<std::unique_ptr<ChessPiece>>& bCopy
     ) {
         // Create temp copy of board
-        std::vector<std::unique_ptr<ChessPiece>> bCopy(board.size());
         for (int i = 0; i < bCopy.size(); i++) {
             if (board[i]) {
                 bCopy[i] = std::unique_ptr<ChessPiece>(
@@ -56,12 +55,12 @@ namespace chess
             if (piece && piece->getColor() == color) {
                 std::vector<int> legalMoves;
 
-                // std::vector<std::unique_ptr<ChessPiece>> bCopy;
+                // std::vector<std::unique_ptr<ChessPiece>> bCopy(board.size());
                 // copyBoard(board, bCopy);
                 // legalMoves = piece->getValidMoves(
                 //     pos, std::move(bCopy)
                 // );
-                legalMoves = piece->getValidMoves(pos, board);
+                legalMoves = piece->getLegalMoves(pos, board);
 
                 legalStartPositions.push_back(pos);
                 legalMovesPerPiece.push_back(legalMoves);
@@ -108,8 +107,8 @@ namespace chess
         const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        const int maxHorizDist = numFiles,
-        const int maxVertDist = numRanks
+        const int maxHorizDist,
+        const int maxVertDist
     ) {
         const auto [startCol, startRow] = positionToColAndRow(startPos);
         
@@ -152,8 +151,8 @@ namespace chess
         const int startPos,
         const std::vector<std::unique_ptr<ChessPiece>>& board,
         std::vector<int>& outValidNewPositions,
-        const int maxHorizDist = numFiles,
-        const int maxVertDist = numRanks
+        const int maxHorizDist,
+        const int maxVertDist
     ) {
         const auto [startCol, startRow] = positionToColAndRow(startPos);
 

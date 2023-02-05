@@ -4,7 +4,7 @@
 // Date: 2023-02-04
 
 #include "Rook.hpp"
-#include "chessPieceUtils.hpp"
+#include "ChessPieceUtils.hpp"
 
 namespace chess
 {
