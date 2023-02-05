@@ -4,7 +4,8 @@
 #include "Rook.hpp"
 #include "Bishop.hpp"
 
-using chess::Pawn, chess::pieceColor;
+using chess::pieceColor;
+using chess::Pawn;
 using chess::Queen;
 using chess::Rook;
 using chess::Bishop;
