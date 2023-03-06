@@ -6,7 +6,7 @@ SRC     := src
 INCLUDE := include
 
 LIBRARIES   :=
-EXECUTABLE  := main.exe
+EXECUTABLE  := main
 
 
 all: $(BIN)/$(EXECUTABLE)
